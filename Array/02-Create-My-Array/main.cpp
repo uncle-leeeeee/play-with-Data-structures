@@ -14,5 +14,11 @@ int main()
     arr1.print();
     arr1.addFirst(-1);
     arr1.print();
+
+    arr1.remove(2);
+    arr1.print();
+
+    arr1.removeElement(9);
+    arr1.print();
     return 0;
 }

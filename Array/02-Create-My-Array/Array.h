@@ -86,6 +86,70 @@ public:
         data[index] = e;
     }
 
+    //查找数组里面是否有元素e
+    bool contains(int e)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (data[i] == e)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //返回查找元素的索引，找到返回i，否则返回-1
+    int find(int e)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (data[i] == e)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    //从数组中删除index的元素，并返回被删除的元素
+    int remove(int index)
+    {
+        assert(index < size && index >= 0);
+        int e = data[index];                   //先把要删除的元素存起来
+        for (int i = index; i < size - 1; i++) //从index+1开始，元素往前挪
+        {
+            data[i] = data[i + 1];
+        }
+        size--; //要记得更新size的位置。
+        return e;
+    }
+
+    //从数组中删除第一个元素，返回删除的元素
+    int removeFirst()
+    {
+        return remove(0);
+    }
+
+    //从数组中删除最后一个元素，返回删除的元素
+    int removeLast()
+    {
+        return remove(size - 1);
+    }
+
+    //从数组中删除元素e
+    void removeElement(int e)
+    {
+        if (find(e) != -1)
+        {
+            remove(find(e));
+        }
+        else
+        {
+            cout << "该数组不存在该数";
+        }
+    }
+
     //数组输出函数
     void print()
     {
