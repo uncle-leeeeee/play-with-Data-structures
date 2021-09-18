@@ -1,10 +1,12 @@
 #include <iostream>
 #include "Array.h"
+#include "Student.h"
 using namespace std;
 
 int main()
 {
-    Array arr1 = Array(20);
+
+    Array<int> arr1 = Array<int>(20);
     for (int i = 0; i < 10; i++)
     {
         arr1.addLast(i);
@@ -20,5 +22,10 @@ int main()
 
     arr1.removeElement(9);
     arr1.print();
+
+    Array<Student> arr2 = Array<Student>();
+    arr2.addFirst(Student("Alice", 100));
+    arr2.addLast(Student("Bob", 66));
+    arr2.print();
     return 0;
 }
