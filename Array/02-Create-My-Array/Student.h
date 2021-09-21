@@ -9,12 +9,13 @@ private:
     int score;
 
 public:
-    Student(string studentName, int studentScore)
+    Student(string studentName = "", int studentScore = 0)
     {
         name = studentName;
         score = studentScore;
     }
-    friend iostream &operator<<(iostream &a, Student &student)
+    //这里是ostream不是iostream
+    friend ostream &operator<<(ostream &a, Student &student)
     {
         a << "name: " << student.name << ", "
           << " score: " << student.score << endl;

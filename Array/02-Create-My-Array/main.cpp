@@ -23,9 +23,23 @@ int main()
     arr1.removeElement(9);
     arr1.print();
 
-    Array<Student> arr2 = Array<Student>();
-    arr2.addFirst(Student("Alice", 100));
-    arr2.addLast(Student("Bob", 66));
-    arr2.print();
+    // Array<Student> arr2 = Array<Student>();
+    // arr2.addFirst(Student("Alice", 100));
+    // arr2.addLast(Student("Bob", 66));
+    // arr2.print();
+
+    for (int i = 0; i < 2; i++)
+    {
+        arr1.removeLast();
+        arr1.print();
+        arr1.removeFirst();
+        arr1.print();
+        arr1.addLast(1);
+        arr1.addLast(1);
+        arr1.addLast(1);
+        arr1.addLast(1);
+        arr1.print();
+    }
+
     return 0;
 }
