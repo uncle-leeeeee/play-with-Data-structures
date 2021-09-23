@@ -1,8 +1,8 @@
 #include "Array.h"
 #include "Queue.h"
 
-template <typename T>
-class ArrayQueue : public Queue
+template <class T>
+class ArrayQueue : public Queue<T>
 {
 public:
     ArrayQueue() //无参构造函数
@@ -36,9 +36,9 @@ public:
         return array->getFirst();
     }
 
-    void enqueue() //在队尾加入元素
+    void enqueue(T e) //在队尾加入元素
     {
-        array->addLast();
+        array->addLast(e);
     }
 
     bool isEmpty() //判断该队列是否为空
