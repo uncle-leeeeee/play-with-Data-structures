@@ -1,7 +1,7 @@
 #include "Queue.h"
 #include <iostream>
 #include <cassert>
-
+using namespace std;
 template <typename T>
 class LoopQueue : public Queue<T>
 {
@@ -37,6 +37,8 @@ public:
 
     T getFront()
     {
+        //先判断队列是否为空
+        assert(front != tail);
         return data[front];
     }
     //获取当前元素个数，无论tail在前还是后都可以
@@ -55,10 +57,10 @@ public:
     {
         if ((tail + 1) % capacity == front)
         {
-            resize(capacity * 2);
+            resize(capacity * 2); //这里的resize函数很重要。
         }
         data[tail] = e;
-        tail = (tail + 1) % capacity;
+        tail = (tail + 1) % capacity; //调整tail的位置，但如果没有及时更新容量，可能会造成tail和front重合，最后导致判断队列为空，没有输出结果。
     }
     //出队，记得从队首出队
     T dequeue()
@@ -75,12 +77,29 @@ public:
         return e;
     }
 
+    //输出函数
+    void print()
+    {
+        cout << "LoopQueue: size= " << getSize() << ", capacity= " << capacity << endl;
+        cout << "front[";
+        for (int i = front; i != tail; i = (i + 1) % capacity)
+        {
+            cout << data[i];
+            //判断是否最后一个输出，如果不是则输出一个逗号
+            if ((i + 1) % capacity != tail)
+            {
+                cout << ",";
+            }
+        }
+        cout << "] tail" << endl;
+    }
+
 private:
     T *data;
     int front, tail; //这里的尾部指向最后一个元素再后一位。
     int capacity;
 
-    //将数组空间容量进行改变
+    //将数组空间容量进行改变，放到私有成员，不允许外界直接访问
     void resize(int newCapacity)
     {
         T *newdata = new T[newCapacity + 1]; //由于多出一位元素为空，所以这里要在多加哎
@@ -93,6 +112,7 @@ private:
         data = newdata;   //将data指针指向新数组
         tail = getSize(); //由于新数组是从0到size都有元素,更新tail为getSize()
         front = 0;
+        capacity = newCapacity; //这里要重新赋值为新的capacity，不然会造成难以发现的错误
         newdata = nullptr;
     }
 };
