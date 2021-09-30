@@ -1,3 +1,6 @@
+#ifndef LOOPQUEUE_H
+#define LOOPQUEUE_H
+
 #include "Queue.h"
 #include <iostream>
 #include <cassert>
@@ -82,19 +85,20 @@ public:
     {
         cout << "LoopQueue: size= " << getSize() << ", capacity= " << capacity << endl;
         cout << "front[";
-        for (int i = front; i != tail; i = (i + 1) % capacity)
+        for (int i = front; i != tail; i = (i + 1) % capacity) //注意当front==tail时，没有输出，与队列当前为空的状态对应上了。
         {
             cout << data[i];
             //判断是否最后一个输出，如果不是则输出一个逗号
             if ((i + 1) % capacity != tail)
             {
-                cout << ",";
+                cout << ", ";
             }
         }
         cout << "] tail" << endl;
     }
 
 private:
+    //私有变量为data数组，队首和队尾，以及队列的capacity
     T *data;
     int front, tail; //这里的尾部指向最后一个元素再后一位。
     int capacity;
@@ -102,7 +106,7 @@ private:
     //将数组空间容量进行改变，放到私有成员，不允许外界直接访问
     void resize(int newCapacity)
     {
-        T *newdata = new T[newCapacity + 1]; //由于多出一位元素为空，所以这里要在多加哎
+        T *newdata = new T[newCapacity + 1]; //由于多出一位元素为空，所以这里要在多加1
         //把旧数组元素放入新数组
         for (int i = 0; i < getSize(); i++)
         {
@@ -116,3 +120,5 @@ private:
         newdata = nullptr;
     }
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef ARRAYQUEUE_H
+#define ARRAYQUEUE_H
+
 #include "Array.h"
 #include "Queue.h"
 
@@ -57,3 +60,5 @@ public:
 private:
     Array<T> *array;
 };
+
+#endif
