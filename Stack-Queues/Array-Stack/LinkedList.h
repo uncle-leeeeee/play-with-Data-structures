@@ -146,7 +146,7 @@ public:
         TemNode->next = nullptr;
         size--;
         return TemNode->e;
-        }
+    }
 
     //删除第一个元素
     T removeFirst()

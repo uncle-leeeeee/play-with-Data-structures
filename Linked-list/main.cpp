@@ -20,5 +20,12 @@ int main()
     Linklist->set(5, 10);
     Linklist->print();
 
+    Linklist->remove(2);
+    Linklist->print();
+    Linklist->removeFirst();
+    Linklist->print();
+    Linklist->removeLast();
+    Linklist->print();
+
     return 0;
 }

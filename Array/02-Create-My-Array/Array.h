@@ -131,8 +131,9 @@ public:
             data[i] = data[i + 1];
         }
         size--; //要记得更新size的位置。
-        //如果删除后的size大小为原来容量的一半，则可以对数组容量进行调整
-        if (size == capacity / 2 && capacity / 2 != 0)
+        //如果删除后的size大小为原来容量的四分之一时，则可以对数组容量进行调整
+        //将容量改为当前的二分之一
+        if (size == capacity / 4 && capacity / 2 != 0)
         {
             resize(capacity / 2);
         }
