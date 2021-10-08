@@ -51,10 +51,10 @@ public:
 
     void add(int index, T e)
     {
-        assert(index >= 0 && index <= size); //判断index位置，最大可以是size位置
+        assert(index >= 0 && index <= size); //判断index位置，添加元素最大的下标可以是size
 
         Node<T> *prev = dummyhead;
-        for (int i = 0; i < index; i++)
+        for (int i = 0; i < index; i++) //这里刚好遍历到index的前一位元素
         {
             prev = prev->next;
         }
@@ -146,7 +146,7 @@ public:
         TemNode->next = nullptr;
         size--;
         return TemNode->e;
-        }
+    }
 
     //删除第一个元素
     T removeFirst()
