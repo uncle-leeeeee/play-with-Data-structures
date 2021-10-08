@@ -1,6 +1,7 @@
 #include <iostream>
 #include "LoopQueue.h"
 #include "ArrayQueue.h"
+#include "LinkedListQueue.h"
 #include <time.h>
 using namespace std;
 
@@ -60,14 +61,17 @@ int main()
     // lq = nullptr;
 
     int opCount = 100000;
-    ArrayQueue<int> *arrQ = new ArrayQueue<int>();
-    cout << "ArrayQueue time: " << testQueue(arrQ, opCount) << " s" << endl;
+    // ArrayQueue<int> *arrQ = new ArrayQueue<int>();
+    // cout << "ArrayQueue time: " << testQueue(arrQ, opCount) << " s" << endl;
     LoopQueue<int> *looQ = new LoopQueue<int>();
     cout << "LoopQueue time: " << testQueue(looQ, opCount) << endl;
-    delete[] arrQ;
-    delete[] looQ;
-    arrQ = nullptr;
+    LinkedListQueue<int> *LLQ = new LinkedListQueue<int>();
+    cout << "LinkedListQueue time: " << testQueue(LLQ, opCount) << endl;
+    cout << "end";
     looQ = nullptr;
+    LLQ = nullptr;
+    delete looQ;
+    delete LLQ;
 
     return 0;
 }
