@@ -9,6 +9,7 @@ public:
     ListNode(T x)
     {
         val = x;
+        next = nullptr;
     }
 
     ~ListNode()
