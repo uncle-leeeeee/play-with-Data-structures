@@ -1,4 +1,4 @@
-#include "ListNode.h"
+//#include "ListNode.h"
 //没有虚拟头结点的情况下，删除某值节点
 template <typename T>
 class Solution
@@ -21,12 +21,12 @@ public:
         }
 
         //当是中间元素需要删除时
-        ListNode *prev = head;
+        ListNode<T> *prev = head;
         while (prev->next != nullptr)
         {
             if (prev->next->val == val)
             {
-                ListNode *delNode = prev->next;
+                ListNode<T> *delNode = prev->next;
                 prev->next = delNode->next;
                 delNode->next = nullptr;
                 delNode = nullptr;

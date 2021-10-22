@@ -1,11 +1,11 @@
-#include "ListNode.h"
+//#include "ListNode.h"
 
 //带有虚拟头结点的写法
 template <typename T>
 class Solution3
 {
 public:
-    ListNode<T> *removeElements(ListNode *head, int val)
+    ListNode<T> *removeElements(ListNode<T> *head, int val)
     {
         ListNode<T> *dummyHead = new ListNode<T>(-1); //新建一个虚拟的头结点
         dummyHead->next = head;                       //将虚拟头结点指向真正的头结点
