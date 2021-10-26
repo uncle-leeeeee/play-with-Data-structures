@@ -39,6 +39,6 @@ public: //因为removeelement删除函数需要直接访问链表里面的元素
             std::cout << cur->val << "->";
             cur = cur->next;
         }
-        std::cout << std::endl;
+        std::cout << "NULL" << std::endl;
     }
 };
