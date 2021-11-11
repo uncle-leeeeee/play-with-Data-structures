@@ -21,7 +21,7 @@ private:
     int size;
 
 public:
-    BST()
+    BST() //无参构造函数
     {
         root = nullptr;
         size = 0;
