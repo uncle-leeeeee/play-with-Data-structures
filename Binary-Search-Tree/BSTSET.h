@@ -22,7 +22,7 @@ public:
 
     void add(T e)
     {
-        bst.add(e);
+         bst.add(e);
     }
 
     bool contains(T e)
@@ -52,6 +52,6 @@ public:
             std::cout << '"' << code << '"' << std::endl;
             bst.add(code);
         }
-        return bst.getsize()
+        return bst.getsize();
     }
 };
