@@ -101,6 +101,107 @@ private:
         std::cout << node->e << " ";
     }
 
+    //找到最小元素节点
+    Node<T> *Min(Node<T> *node)
+    {
+        if (node->left == nullptr)
+        {
+            return node;
+        }
+        return Min(node->left);
+    }
+
+    //找到最大元素节点
+    Node<T> *Max(Node<T> *node)
+    {
+        if (node->right == nullptr)
+        {
+            return node;
+        }
+        return Max(node->right);
+    }
+
+    //把最小元素去掉
+    Node<T> *removeMin(Node<T> *node)
+    {
+        if (node->left == nullptr) //当左子节点为空时
+        {
+            Node<T> *rightNode = node->right; //记录该节点右子节点
+            delete node;                      //删除该节点
+            size--;                           //元素个数自减
+            return rightNode;                 //返回右节点
+        }
+        node->left = removeMin(node->left); //否则左子树进行递归遍历
+        return node;
+    }
+
+    //把最大元素去掉
+    Node<T> *removeMax(Node<T> *node)
+    {
+        if (node->right == nullptr)
+        {
+            Node<T> nodeleft = node->left;
+            delete node;
+            size--;
+            return nodeleft;
+        }
+        node->right = remove(node->right);
+        return node;
+    }
+
+    //去除二叉搜索树中任意元素，通过后续继承节点，最大中最小的
+    Node<T> *remove(Node<T> *node, T e)
+    {
+        if (node == nullptr) //如果节点为空
+        {
+            return nullptr;
+        }
+        if (e < node->e) //如果删除节点小于当前节点
+        {
+            node->left = remove(node->left, e);
+            return node;
+        }
+        else if (e > node->e)
+        {
+            node->right = remove(node->right, e);
+            return node;
+        }
+        else
+        { //如果当前节点的值等于删除节点的值
+            if (node->left == nullptr)
+            { //如果左子树为空,获取右子节点，删除当前节点，最后返回右子节点
+                Node<T> *rightNode = node->right;
+                node->right = nullptr;
+                delete node;
+                size--; //记得维护size
+                return rightNode;
+            }
+            if (node->right == nullptr)
+            { //如果右子树为空，获取左子节点，删除当前节点，最后返回左子节点
+                Node<T> *leftNode = node->left;
+                node->left = nullptr;
+                delete node;
+                size--;
+                return leftNode;
+            }
+            //如果待删除节点左右子树均不为空的话，则找到比待删除节点大的最小节点，可以是右子树的最小节点(后继节点)
+            Node<T> *successor = Min(node->right);
+            successor->right = removeMin(node->right);
+            successor->left = node->left;
+            node->left = node->right = nullptr;
+            delete node;
+            return successor;
+
+            //前继节点写法
+            // Node<T> *predecessor = Max(node->left);
+            // predecessor->left = removeMax(node->left);
+            // predecessor->right = node->right;
+            // node->left = node->right = nutr;
+            // delete node;
+            // return predecessor;
+        }
+    }
+
 public:
     BST() //无参构造函数
     {
@@ -306,5 +407,10 @@ public:
     void print()
     {
         generateBSTString(root, 0);
+    }
+
+    Node<T> *remove(T e)
+    {
+        return remove(root, e);
     }
 };
