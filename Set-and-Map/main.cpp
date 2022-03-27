@@ -49,6 +49,6 @@ int main()
         std::cout << "Frequency of PRIDE: " << m->get("pride") << std::endl;
         std::cout << "Frequency of PREJUDICE: " << m->get("prejudice") << std::endl;
     }
-    //与二叉搜索树的示例程序相比有所不同，map这里需要计算每个单词的频次，花的时间要更长
+    //与二叉搜索树的存放集合set示例程序相比有所不同，map这里需要计算每个单词的频次，花的时间要更长
     return 0;
 }
