@@ -1,6 +1,5 @@
 #ifndef ARRAY_H
 #define ARRAY_H
-
 #include <iostream>
 
 template <class T>
@@ -103,7 +102,105 @@ public:
         {
             throw Range();
         }
-        data[Index] = e;
+        data[index] = e;
+    }
+
+    bool contains(T e)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (data[i] == e)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    int find(T e)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            if (data[i] == e)
+            {
+                return i;
+            }
+        }
+        return -1; // not found
+    }
+    // remove the value at the index
+    T remove(int index)
+    {
+        if (index < 0 || index >= size)
+        {
+            throw Range();
+        }
+        T ret = data[index];
+        for (int i = index + 1; i < size; i++)
+        {
+            data[i - 1] = data[i];
+        }
+        size--;
+        // if the capacity is 1/4 folds of origin capacity then reszie
+        if (size == capacity / 4 && capacity / 2 != 0)
+        {
+            resize(capacity / 2);
+        }
+        return ret;
+    }
+
+    T removeFirst()
+    {
+        return remove(0);
+    }
+
+    T removeLast()
+    {
+        return remove(size - 1);
+    }
+
+    void removeElement(T e)
+    {
+        int index = find(e);
+        if (index != -1)
+        {
+            remove(index);
+        }
+    }
+
+    void swap(int i, int j)
+    {
+        if (i < 0 || j >= size || j < 0 || i >= size)
+        {
+            throw Range();
+        }
+        T temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
+    }
+
+    void print()
+    {
+        std::cout << "Array: size = " << size << ", capacity=" << getCapacity() << std::endl;
+        toprint();
+    }
+
+    // print the array
+    void toprint()
+    {
+        std::cout << "[";
+        for (int i = 0; i < size; i++)
+        {
+            std::cout << data[i];
+            if (i == size - 1)
+            {
+                std::cout << "]";
+            }
+            else
+            {
+                std::cout << ",";
+            }
+        }
     }
 };
 
