@@ -62,6 +62,48 @@ public:
 
     void add(int index, T e)
     {
+        if (index < 0 || index > size)
+        {
+            throw Range();
+        }
+        if (size == capacity) // increase the capacity 2 fold
+        {
+            resize(2 * capacity);
+        }
+        for (int i = size - 1; i >= index; i--)
+        {
+            data[i + 1] = data[i]; // move back one by one
+        }
+        data[index] = e; // put the value in the right place.
+        size++;
+    }
+
+    void addFirst(T e)
+    {
+        add(0, e);
+    }
+
+    void addLast(T e)
+    {
+        add(size, e);
+    }
+
+    T get(int index)
+    {
+        if (index < 0 || index >= size)
+        {
+            throw Range();
+        }
+        return data[index];
+    }
+
+    void set(int index, T e)
+    {
+        if (index < 0 || index >= size)
+        {
+            throw Range();
+        }
+        data[Index] = e;
     }
 };
 
