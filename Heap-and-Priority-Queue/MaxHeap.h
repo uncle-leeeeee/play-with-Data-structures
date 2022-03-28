@@ -30,15 +30,14 @@ private:
     void shiftDown(int k)
     {
         // check if the k out of index
-        while (leftchild(k) < data->getSize() - 1)
+        while (leftchild(k) < data->getSize())
         {
             // find the largest one between its children
             int j = leftchild(k);
-            if (data->get(j + 1) > data->get(j))
+            if (j + 1 < data->getSize() && data->get(j + 1) > data->get(j))
             {
-                j++; // leftchild +1
+                j++;
             }
-            // meet the condition then break
             if (data->get(k) >= data->get(j))
             {
                 break;

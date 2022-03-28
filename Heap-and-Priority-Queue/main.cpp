@@ -8,7 +8,7 @@ int main()
     MaxHeap<int> *maxHeap = new MaxHeap<int>();
     for (int i = 0; i < n; i++)
     {
-        maxHeap->add(rand() % INT32_MAX);
+        maxHeap->add((rand() % INT32_MAX) + i);
     }
     int *arr = new int[n];
     for (int j = 0; j < n; j++)
@@ -21,10 +21,11 @@ int main()
         std::cout << arr[i] << " ";
     }
 
-    // for (int k = 1; k < n; k++)
-    // {
-    //     assert(arr[k - 1] > arr[k]);
-    // }
+    for (int k = 1; k < n; k++)
+    {
+        assert(arr[k - 1] > arr[k]);
+    }
+    std::cout << std::endl;
     std::cout << "Test MaxHeap completed" << std::endl;
     return 0;
 }
