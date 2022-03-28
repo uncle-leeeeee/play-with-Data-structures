@@ -21,9 +21,9 @@ int main()
         std::cout << arr[i] << " ";
     }
 
-    for (int k = 1; k < n; k++)
+    for (int k = 0; k < n; k++)
     {
-        assert(arr[k - 1] > arr[k]);
+        assert(arr[k - 1] >= arr[k]);
     }
     std::cout << std::endl;
     std::cout << "Test MaxHeap completed" << std::endl;

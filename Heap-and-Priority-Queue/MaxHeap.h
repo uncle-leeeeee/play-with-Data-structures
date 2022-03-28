@@ -19,7 +19,7 @@ private:
     // lift the value at k
     void shiftUp(int k)
     {
-        while (k > 0 && data->get(parent(k) < data->get(k)))
+        while (k > 0 && data->get(parent(k)) < data->get(k))
         {
             data->swap(k, parent(k));
             k = parent(k);
