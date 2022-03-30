@@ -1,6 +1,7 @@
 #ifndef HEAP_MAXHEAP_H
 #define HEAP_MAXHEAP_H
 #include "Array.h"
+
 // create a binary tree by array
 template <class T>
 class MaxHeap
@@ -19,7 +20,7 @@ private:
     // lift the value at k
     void shiftUp(int k)
     {
-        while (k > 0 && data->get(parent(k) < data->get(k)))
+        while (k > 0 && data->get(parent(k)) < data->get(k))
         {
             data->swap(k, parent(k));
             k = parent(k);
@@ -30,6 +31,7 @@ private:
     void shiftDown(int k)
     {
         // check if the k out of index
+        //通过这个逻辑，最后的叶子节点不需要shiftdown，可以通过shiftdown他们的parent来实现规整
         while (leftchild(k) < data->getSize())
         {
             // find the largest one between its children
@@ -64,6 +66,16 @@ public:
     MaxHeap()
     {
         data = new Array<T>();
+    }
+
+    MaxHeap(T arr[], int n)
+    {
+        data = new Array<T>(arr, n);
+        // reorganize the heap
+        for (int i = parent(n - 1); i >= 0; i--)
+        {
+            shiftDown(i);
+        }
     }
 
     int size()
@@ -106,6 +118,14 @@ public:
         T ret = findMax();
         data->swap(0, data->getSize() - 1); // swap first one and the last one
         data->removeLast();
+        shiftDown(0);
+        return ret;
+    }
+
+    T replace(T e)
+    {
+        T ret = findMax();
+        data->set(0, e);
         shiftDown(0);
         return ret;
     }

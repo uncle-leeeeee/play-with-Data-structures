@@ -1,31 +1,58 @@
 #include <iostream>
+#include <ctime>
 #include "MaxHeap.h"
 #include <cassert>
 
-int main()
+template <typename T>
+double testHeap(T testData[], int n, bool isHeapify)
 {
-    int n = 1000000;
-    MaxHeap<int> *maxHeap = new MaxHeap<int>();
-    for (int i = 0; i < n; i++)
+    clock_t startTime = clock();
+    MaxHeap<T> *maxHeap;
+    if (isHeapify)
     {
-        maxHeap->add((rand() % INT32_MAX) + i);
+        maxHeap = new MaxHeap<T>(testData, n);
     }
-    int *arr = new int[n];
+    else
+    {
+        maxHeap = new MaxHeap<T>();
+        for (int i = 0; i < n; i++)
+        {
+            maxHeap->add(testData[i]);
+        }
+    }
+
+    T *arr = new T[n];
     for (int j = 0; j < n; j++)
     {
         arr[j] = maxHeap->extractMax();
     }
+    // std::cout << "after heapifying " << std::endl;
+    // for (int i = 0; i < 20; i++)
+    // {
+    //     std::cout << arr[i] << " ";
+    // }
 
-    for (int i = 0; i < 20; i++)
+    for (int i = 1; i < 20; i++)
     {
-        std::cout << arr[i] << " ";
+        assert(arr[i - 1] >= arr[i]);
     }
+    std::cout << "Test MaxHeap completed." << std::endl;
+    clock_t endTime = clock();
+    return double(endTime - startTime) / CLOCKS_PER_SEC;
+}
 
-    for (int k = 1; k < n; k++)
+int main()
+{
+    int n = 10000000;
+    int *testData = new int[n];
+    for (int i = 0; i < n; i++)
     {
-        assert(arr[k - 1] > arr[k]);
+        testData[i] = rand() % INT32_MAX;
     }
-    std::cout << std::endl;
-    std::cout << "Test MaxHeap completed" << std::endl;
+    double time1 = testHeap(testData, n, false);
+
+    std::cout << "without heapify: " << time1 << " s " << std::endl;
+    double time2 = testHeap(testData, n, true);
+    std::cout << "with heapify: " << time2 << " s " << std::endl;
     return 0;
 }
